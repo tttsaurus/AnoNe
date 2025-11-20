@@ -47,7 +47,7 @@ public class AnoNeProcessor extends AbstractProcessor {
                 scanForOverrides((TypeElement) root);
                 TreePath path = this.trees.getPath(root);
                 if (path != null) {
-                    new InvocationScanner((TypeElement) root).scan(path, null);
+                    new InvocationScanner().scan(path, null);
                 }
             }
         }
@@ -67,7 +67,7 @@ public class AnoNeProcessor extends AbstractProcessor {
         ExecutableElement overridden = findOverriddenMethod(method, enclosing);
         if (overridden != null && overridden.getAnnotation(InvokeOnly.class) != null) {
             this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,
-                    String.format(INVOKE_ONLY_MESSAGE, ((TypeElement) overridden.getEnclosingElement()).getQualifiedName(), overridden.getSimpleName()),
+                    String.format(INVOKE_ONLY_MESSAGE, overridden.getEnclosingElement(), overridden.getSimpleName()),
                     method);
         }
     }
@@ -115,12 +115,6 @@ public class AnoNeProcessor extends AbstractProcessor {
 
     private class InvocationScanner extends TreePathScanner<Void, Void> {
 
-        private final TypeElement clazz;
-
-        private InvocationScanner(TypeElement clazz) {
-            this.clazz = clazz;
-        }
-
         @Override
         public Void visitMethodInvocation(MethodInvocationTree node, Void unused) {
             TreePath currentPath = this.getCurrentPath();
@@ -140,8 +134,8 @@ public class AnoNeProcessor extends AbstractProcessor {
                         }
                         if (enclosing != null) {
                             processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR,
-                                    String.format(OVERRIDE_ONLY_MESSAGE, ((TypeElement) enclosing.getEnclosingElement()).getQualifiedName(), enclosing.getSimpleName()),
-                                    this.clazz);
+                                    String.format(OVERRIDE_ONLY_MESSAGE, method.getEnclosingElement(), method),
+                                    enclosing);
                         }
                     }
                 }
