@@ -6,7 +6,7 @@ import java.lang.annotation.*;
  * It marks that the method is intended to be invoked, not overridden.
  * It targets potential overriders.
  * <p>
- * See {@link InvokeOnly} for the opposite side.
+ * See {@link OverrideOnly} for the opposite side.
  *
  * @see OverrideOnly
  *
@@ -14,4 +14,5 @@ import java.lang.annotation.*;
  */
 @Documented
 @Target(ElementType.METHOD)
+@Retention(RetentionPolicy.CLASS)
 public @interface InvokeOnly { }
