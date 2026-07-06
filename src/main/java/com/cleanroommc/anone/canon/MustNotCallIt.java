@@ -17,7 +17,7 @@ import java.lang.annotation.*;
  * <b>Example</b>
  * <pre>{@code
  * class A {
- *     @MustCallIt(scopeRoot = { B.class })
+ *     @MustNotCallIt(scopeRoot = { B.class })
  *     public static final void internalMethod() { }
  * }
  *
