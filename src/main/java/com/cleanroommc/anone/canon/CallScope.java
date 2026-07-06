@@ -1,20 +1,20 @@
 package com.cleanroommc.anone.canon;
 
 /**
- * @see MustCall
- * @see MustNotCall
+ * @see MustCallIt
+ * @see MustNotCallIt
  *
  * @since 1.0.0
  */
 public enum CallScope {
 
     /**
-     * Applies to every invocation.
+     * Applies to overriding implementations, including only the direct inheritance.
      */
-    GLOBAL,
+    DIRECT_OVERRIDERS,
 
     /**
-     * Applies only to overriding implementations, including all the inheritance hierarchies.
+     * Applies to overriding implementations, including all the inheritance hierarchies.
      */
-    OVERRIDERS
+    TRANSITIVE_OVERRIDERS,
 }

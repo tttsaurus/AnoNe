@@ -1,8 +1,8 @@
 package com.cleanroommc.anone.canon;
 
 /**
- * @see MustCall
- * @see MustNotCall
+ * @see MustCallIt
+ * @see MustNotCallIt
  *
  * @since 1.0.0
  */
