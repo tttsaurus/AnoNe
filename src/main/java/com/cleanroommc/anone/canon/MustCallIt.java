@@ -12,31 +12,28 @@ import java.lang.annotation.*;
  * <hr>
  *
  * However, this is different from a <code>Must Call Super</code> annotation,
- * and it's capable of applying to arbitrary method hierarchies.
+ * and it's capable of applying to arbitrary method inheritance hierarchies.
  * <p><br>
  * <b>Example</b>
  * <pre>{@code
- * abstract class A {
- *     @MustCallIt(scopeRoot = { A.class })
- *     final void checkPreconditions() { }
- *
- *     abstract void method1();
- *     abstract void method2();
- *     abstract void method3();
+ * class A {
+ *     @MustCallIt(scopeRoot = { B.class })
+ *     public static final void checkPreconditions(B b) { }
  * }
  *
- * class B extends A {
+ * abstract class B {
+ *     abstract void method1();
+ *     abstract void method2();
+ * }
+ *
+ * class C extends B {
  *     @Override
  *     void method1() {
- *         checkPreconditions(); // must call
+ *         A.checkPreconditions(this); // must call
  *     }
  *     @Override
  *     void method2() {
- *         checkPreconditions(); // must call
- *     }
- *     @Override
- *     void method3() {
- *         checkPreconditions(); // must call
+ *         A.checkPreconditions(this); // must call
  *     }
  * }
  * }

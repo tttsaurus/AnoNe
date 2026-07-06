@@ -12,7 +12,7 @@ import java.lang.annotation.*;
  * <hr>
  *
  * However, this is different from a <code>Must Not Call Super</code> annotation,
- * and it's capable of applying to arbitrary method hierarchies.
+ * and it's capable of applying to arbitrary method inheritance hierarchies.
  * <p><br>
  * <b>Example</b>
  * <pre>{@code
@@ -22,12 +22,17 @@ import java.lang.annotation.*;
  * }
  *
  * abstract class B {
- *     void method();
+ *     abstract void method1();
+ *     abstract void method2();
  * }
  *
  * class C extends B {
  *     @Override
- *     void method() {
+ *     void method1() {
+ *         // must not call A#internalMethod
+ *     }
+ *     @Override
+ *     void method2() {
  *         // must not call A#internalMethod
  *     }
  * }
